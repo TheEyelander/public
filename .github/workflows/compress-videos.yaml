@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         input-url: ${{ fromJson(inputs.input-urls) }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Download FFmpeg
         run: curl -fsSL "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz" | tar -xJ -f -
@@ -42,7 +42,7 @@ jobs:
             "$RUNNER_TEMP/$INPUT"
 
       - name: Upload
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v7
         with:
           archive: false
           path: ${{ runner.temp }}/${{ env.INPUT }}
@@ -50,15 +50,9 @@ jobs:
   merge-artifacts:
     needs: compress-videos
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
-      - name: Download
-        uses: actions/download-artifact@main
-        with:
-          merge-multiple: true
-
-      - name: Upload
-        uses: actions/upload-artifact@main
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v7
         with:
           name: ${{ github.job }}
-          path: .
