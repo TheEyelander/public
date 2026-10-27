@@ -2,8 +2,10 @@ name: Run Rizin
 on:
   workflow_dispatch:
     inputs:
-      commands:
-        description: Commands
+      input-url:
+        description: Input URL
+        required: true
+      c:
         required: true
         
 jobs:
@@ -13,7 +15,7 @@ jobs:
     steps:
       - name: Run Rizin
         run: |
-          rizin -q -c "${{ inputs.commands }}" /bin/ls
+          rizin -q -c "${{ inputs.c }}" "$(curl -fsSLOJ -w "%{filename_effective}" "${{ inputs.input-url }}")" > "${{ github.job }}.txt"
 
       - name: Upload
         uses: actions/upload-artifact@v7
