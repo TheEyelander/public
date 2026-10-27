@@ -34,11 +34,10 @@ jobs:
         run: |
           ./*/bin/ffmpeg \
             -i "$INPUT" \
-            -c:v libx265 \
-            -crf 30 \
-            -pix_fmt yuv420p10le \
             -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" \
             ${{ inputs.include-audio && '-c:a libopus' || '-an' }} \
+            -c:v libx265 \
+            -pix_fmt yuv420p10le \
             "$RUNNER_TEMP/$INPUT"
 
       - name: Upload
