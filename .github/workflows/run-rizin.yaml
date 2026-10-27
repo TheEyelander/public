@@ -7,5 +7,4 @@ jobs:
     steps:
       - name: Run Rizin
         run: |
-          rizin -v
-          rizin -q -c "aaa; pdg" /bin/ls
+          rizin -q -c "aaa; s main; pdg" /bin/ls
