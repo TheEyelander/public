@@ -1,5 +1,11 @@
 name: Run Rizin
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      commands:
+        description: Commands
+        required: true
+        
 jobs:
   run-rizin:
     runs-on: ubuntu-26.04
@@ -7,4 +13,10 @@ jobs:
     steps:
       - name: Run Rizin
         run: |
-          rizin -q -c "aaa; s main; pdg" /bin/ls
+          rizin -q -c "${{ inputs.commands }}" /bin/ls
+
+      - name: Upload
+        uses: actions/upload-artifact@v7
+        with:
+          archive: false
+          path: ${{ github.job }}.txt
