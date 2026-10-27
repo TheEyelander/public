@@ -1,4 +1,4 @@
-name: Build LuaJIT for Android
+name: Build LuaJIT
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  build-luajit-for-android:
+  build-luajit:
     runs-on: ubuntu-26.04
     steps:
       - name: Checkout
@@ -19,7 +19,7 @@ jobs:
       - name: Install gcc-multilib
         run: sudo apt-get install --no-install-recommends gcc-multilib
 
-      - name: Build LuaJIT for Android (armeabi-v7a)
+      - name: Build LuaJIT (armeabi-v7a)
         run: |
           bin="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin"
           cc="$bin/armv7a-linux-androideabi21-clang"
@@ -37,7 +37,7 @@ jobs:
           mkdir armeabi-v7a
           mv src/libluajit.* armeabi-v7a
 
-      - name: Build LuaJIT for Android (arm64-v8a)
+      - name: Build LuaJIT (arm64-v8a)
         run: |
           bin="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin"
           cc="$bin/aarch64-linux-android21-clang"
