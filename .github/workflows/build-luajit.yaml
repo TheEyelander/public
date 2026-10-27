@@ -1,11 +1,5 @@
 name: Build LuaJIT
-on:
-  workflow_dispatch:
-    inputs:
-      source-repository:
-        description: Source repository
-        default: LuaJIT/LuaJIT
-        required: true
+on: workflow_dispatch
 
 jobs:
   build-luajit:
@@ -14,7 +8,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          repository: ${{ inputs.source-repository }}
+          repository: LuaJIT/LuaJIT
+          ref: v2.1
 
       - name: Install gcc-multilib
         run: sudo apt-get install --no-install-recommends gcc-multilib
