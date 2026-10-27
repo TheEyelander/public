@@ -1,0 +1,9 @@
+name: Rizin
+on: workflow_dispatch
+jobs:
+  runs-on: ubuntu-26.04
+  steps:
+    - name: Run Rizin
+      uses: docker://rizin:v0.9.1
+      run: |
+        rizin -v
