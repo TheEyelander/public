@@ -14,8 +14,7 @@ jobs:
     container: rizin/rizin:v0.9.1
     steps:
       - name: Run Rizin
-        run: |
-          rizin -q -c "${{ inputs.c }}" "$(curl -fsSLOJ -w "%{filename_effective}" "${{ inputs.input-url }}")" > "${{ github.job }}.txt"
+        run: rizin -q -c "${{ inputs.c }}" "$(curl -fsSLOJ -w "%{filename_effective}" "${{ inputs.input-url }}")" > "${{ github.job }}.txt"
 
       - name: Upload
         uses: actions/upload-artifact@v7
