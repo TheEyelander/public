@@ -3,6 +3,10 @@ on: workflow_dispatch
 jobs:
   run-rizin:
     runs-on: ubuntu-26.04
+    container:
+      image: rizin/rizin:v0.9.1
     steps:
       - name: Run Rizin
-        uses: docker://rizin:v0.9.1
+        run: |
+          rizin -v
+          rizin -q -c "aaa; pdg" /bin/ls
