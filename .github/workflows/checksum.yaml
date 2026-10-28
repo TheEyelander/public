@@ -12,4 +12,9 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checksum
-        run: cksum -a sha256 "$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
+        run: |
+          input="$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
+
+          cksum -a md5 "$input"
+          cksum -a sha1 "$input"
+          cksum -a sha256 "$input"
