@@ -50,4 +50,4 @@ jobs:
       - name: Merge artifacts
         uses: actions/upload-artifact/merge@v7
         with:
-          name: ${{ github.job }}
+          name: merge-artifacts
