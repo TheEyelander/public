@@ -1,20 +1,13 @@
-name: Run Rizin
-on:
-  workflow_dispatch:
-    inputs:
-      input-url:
-        description: Input URL
-        required: true
-      c:
-        required: true
+name: Rizin
+on: workflow_dispatch
         
 jobs:
-  run-rizin:
+  rizin:
     runs-on: ubuntu-26.04
     container: rizin/rizin:v0.9.1
     steps:
-      - name: Run Rizin
-        run: rizin -q -c "${{ inputs.c }}" "$(curl -fsSLOJ -w "%{filename_effective}" "${{ inputs.input-url }}")" > "${{ github.job }}.txt"
+      - name: Rizin
+        run: rizin -q -c "aaa; pdg" "$(curl -fsSLOJ -w "%{filename_effective}" "$test")" > "${{ github.job }}.txt"
 
       - name: Upload
         uses: actions/upload-artifact@v7
