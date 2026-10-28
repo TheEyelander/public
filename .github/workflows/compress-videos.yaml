@@ -8,7 +8,6 @@ on:
       input-cookies:
         required: false
       max-resolution:
-        description: Max resolution
         options: [1080, 720, 480, 360, 240, 144]
         type: choice
 
