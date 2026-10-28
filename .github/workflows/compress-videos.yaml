@@ -34,7 +34,7 @@ jobs:
             -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" \
             "$RUNNER_TEMP/$INPUT"
 
-      - name: Upload
+      - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
           archive: false
