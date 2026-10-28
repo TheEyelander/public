@@ -5,12 +5,14 @@ jobs:
   build-luajit:
     runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@v7
         with:
           repository: LuaJIT/LuaJIT
           ref: v2.1
 
-      - run: sudo apt-get install --no-install-recommends gcc-multilib
+      - name: Install gcc-multilib
+        run: sudo apt-get install --no-install-recommends gcc-multilib
 
       - name: Build LuaJIT (armeabi-v7a)
         run: |
@@ -48,7 +50,8 @@ jobs:
           mkdir arm64-v8a
           mv src/libluajit.* arm64-v8a
 
-      - uses: actions/upload-artifact@v7
+      - name: Upload
+        uses: actions/upload-artifact@v7
         with: 
           name: ${{ github.job }}
           path: |
