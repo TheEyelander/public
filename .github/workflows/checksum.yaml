@@ -2,7 +2,7 @@ name: Checksum
 on:
   workflow_dispatch:
     inputs:
-      input-url:
+      url:
         required: true
       cookies:
         required: false
@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checksum
-        run: cksum -a sha256 "$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.input-url }}")"
+        run: cksum -a sha256 "$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
