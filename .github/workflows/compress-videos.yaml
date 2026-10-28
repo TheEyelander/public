@@ -4,10 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       input-urls:
-        description: Input URLs
         required: true
       input-cookies:
-        description: Input cookies
+        required: false
       max-resolution:
         description: Max resolution
         options: [1080, 720, 480, 360, 240, 144]
