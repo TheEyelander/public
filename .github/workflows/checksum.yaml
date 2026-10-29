@@ -11,8 +11,7 @@ jobs:
   checksum:
     runs-on: ubuntu-26.04
     steps:
-      - name: Checksum
-        run: |
+      - run: |
           input="$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
 
           cksum -a md5 "$input"

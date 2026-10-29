@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Download FFmpeg
-        run: curl -fsSL "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz" | tar -xJ -f -
+        run: curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ -f -
 
       - name: Download video
         run: printf "%s\n" "INPUT=$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" "${{ matrix.url }}")" >> "$GITHUB_ENV"
@@ -34,7 +34,7 @@ jobs:
             -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" \
             "$RUNNER_TEMP/$INPUT"
 
-      - name: Upload artifact
+      - name: Upload
         uses: actions/upload-artifact@v7
         with:
           archive: false
@@ -45,7 +45,6 @@ jobs:
     if: always()
     runs-on: ubuntu-26.04
     steps:
-      - name: Merge artifacts
-        uses: actions/upload-artifact/merge@v7
+      - uses: actions/upload-artifact/merge@v7
         with:
-          name: merge-artifacts
+          name: ${{ github.job }}
