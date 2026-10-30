@@ -1,0 +1,22 @@
+name: Compress Files
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        required: true
+      cookies:
+        required: false
+
+jobs:
+  compress-files:
+    runs-on: ubuntu-26.04
+    steps:
+      - run: |
+          for url in ${{ inputs.urls }}; do
+            curl -fsSLOJ -b "${{ inputs.cookies }}" "$url"
+          done
+
+      - uses: actions/upload-artifact@v7
+        with:
+           name: ${{ github.job }}
+           path: .
