@@ -11,8 +11,15 @@ jobs:
   compress-file:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -LOJ -b "${{ inputs.cookies }}" "${{ inputs.url }}"
+      - name: Compress file
+        run: printf "%s\n" "INPUT=$(curl -LOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@main
+        with:
+          archive: false
+          path: ${{ env.INPUT }}
+
       - uses: actions/upload-artifact@main
         with:
           name: ${{ github.job }}
-          path: .
+          path: ${{ env.INPUT }}
