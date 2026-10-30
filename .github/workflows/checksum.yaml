@@ -9,7 +9,7 @@ on:
 
 jobs:
   checksum:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     steps:
       - run: |
           input="$(curl -sSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"

@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         url: ${{ fromJson(inputs.urls) }}
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download FFmpeg
         run: curl -sSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ -f -
@@ -34,7 +34,7 @@ jobs:
             -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" \
             "$RUNNER_TEMP/$INPUT"
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@main
         with:
           archive: false
           path: ${{ runner.temp }}/${{ env.INPUT }}
@@ -42,8 +42,8 @@ jobs:
   merge-artifacts:
     needs: compress-videos
     if: always()
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact/merge@v7
+      - uses: actions/upload-artifact/merge@main
         with:
           name: ${{ github.job }}
