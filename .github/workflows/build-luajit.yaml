@@ -5,8 +5,7 @@ jobs:
   build-luajit:
     runs-on: ubuntu-26.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           repository: LuaJIT/LuaJIT
           ref: v2.1
@@ -50,8 +49,7 @@ jobs:
           mkdir arm64-v8a
           mv src/libluajit.* arm64-v8a
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v7
         with: 
           name: ${{ github.job }}
           path: |

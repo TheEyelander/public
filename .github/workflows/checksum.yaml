@@ -1,0 +1,25 @@
+name: Checksum
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        required: true
+      cookies:
+        required: false
+
+jobs:
+  checksum:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checksum
+        run: |
+          input="(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
+
+          cksum -a md5 "$input" >> "${{ github.job }}.txt"
+          cksum -a sha1 "$input" >> "${{ github.job }}.txt"
+          cksum -a sha256 "$input" >> "${{ github.job }}.txt"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          archive: false
+          path: ${{ github.job }}.txt
