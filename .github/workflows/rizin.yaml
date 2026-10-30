@@ -1,0 +1,15 @@
+name: Rizin
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        required: true
+
+jobs:
+  rizin:
+    runs-on: ubuntu-latest
+    container: kalilinux/kali-rolling
+    steps:
+      - run: |
+          sudo apt-get install --no-install-recommends rizin rz-ghidra
+          rizin -q -c "aaa; pdg" "$(curl -sSLOJ -w "%{filename_effective}" "${{ inputs.url }}")"
