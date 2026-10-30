@@ -12,4 +12,4 @@ jobs:
     steps:
       - run: |
           sudo apt-get install --no-install-recommends rizin rz-ghidra
-          rizin -q -c "aaa; pdg" "$(curl -sSLOJ -w "%{filename_effective}" "${{ inputs.url }}")"
+          rizin -q -c "aaa; pdg" "$(curl -LOJ -w "%{filename_effective}" "${{ inputs.url }}")"
