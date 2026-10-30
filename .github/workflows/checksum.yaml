@@ -12,5 +12,5 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - run: |
-          input="$(curl -fsSLO -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
+          input="$(curl -sSLO -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
           printf "%s\n" "$(cksum -a md5 "$input")" "$(cksum -a sha1 "$input")" "$(cksum -a sha256 "$input")" >> "$GITHUB_STEP_SUMMARY"
