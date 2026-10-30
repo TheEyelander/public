@@ -19,7 +19,8 @@ jobs:
           cksum -a sha1 "$input" >> "${{ github.job }}.txt"
           cksum -a sha256 "$input" >> "${{ github.job }}.txt"
 
-      - uses: actions/upload-artifact@v7
+      - name: Upload
+        uses: actions/upload-artifact@v7
         with:
           archive: false
           path: ${{ github.job }}.txt
