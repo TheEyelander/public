@@ -11,7 +11,7 @@ jobs:
   compress-file:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -sSLOJ -b "${{ inputs.cookies }}" "${{ inputs.url }}"
+      - run: curl -LOJ -b "${{ inputs.cookies }}" "${{ inputs.url }}"
       - uses: actions/upload-artifact@main
         with:
           name: ${{ github.job }}
