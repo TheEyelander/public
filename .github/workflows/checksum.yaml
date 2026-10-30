@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checksum
         run: |
-          input="(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
+          input="$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
 
           cksum -a md5 "$input" >> "${{ github.job }}.txt"
           cksum -a sha1 "$input" >> "${{ github.job }}.txt"
