@@ -11,7 +11,6 @@ jobs:
   checksum:
     runs-on: ubuntu-latest
     steps:
-      - name: Checksum
-        run: |
+      - run: |
           input="$(curl -LOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" "${{ inputs.url }}")"
           printf "%s\n" "$(cksum -a md5 "$input")" "$(cksum -a sha1 "$input")" "$(cksum -a sha256 "$input")" >> "$GITHUB_STEP_SUMMARY"
