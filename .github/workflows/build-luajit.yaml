@@ -5,11 +5,14 @@ jobs:
   build-luajit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
+      - name: Checkout
+        uses: actions/checkout@main
         with:
           repository: LuaJIT/LuaJIT
 
-      - run: sudo apt-get install --no-install-recommends gcc-multilib
+      - name: Install gcc-multilib
+        run: sudo apt-get install --no-install-recommends gcc-multilib
+
       - name: Build LuaJIT (armeabi-v7a)
         run: |
           bin="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin"
@@ -46,7 +49,8 @@ jobs:
           mkdir arm64-v8a
           mv src/libluajit.* arm64-v8a
 
-      - uses: actions/upload-artifact@main
+      - name: Upload
+        uses: actions/upload-artifact@main
         with: 
           name: ${{ github.job }}
           path: |
