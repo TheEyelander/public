@@ -12,7 +12,7 @@ jobs:
     steps:
       - run: |
           apt-get update
-          apt-get install --no-install-recommends rizin rz-ghidra
+          apt-get install -y --no-install-recommends rizin rz-ghidra
 
           rizin -q -c "aa; pdg" "$(curl -LOJ -w "%{filename_effective}" "${{ inputs.url }}")" > "${{ github.job }}.txt"
 
