@@ -13,7 +13,7 @@ jobs:
       - name: Rizin
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends rizin rz-ghidra
+          apt-get install -y --no-install-recommends curl rizin rz-ghidra
 
           rizin -q -c "aa; pdg" "$(curl -LOJ -w "%{filename_effective}" "${{ inputs.url }}")" > "${{ github.job }}.txt"
 
