@@ -1,6 +1,5 @@
 name: Build LuaJIT
 on: workflow_dispatch
-
 jobs:
   build-luajit:
     runs-on: ubuntu-latest
