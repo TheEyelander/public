@@ -10,7 +10,7 @@ jobs:
           repository: LuaJIT/LuaJIT
 
       - name: Install gcc-multilib
-        run: sudo apt-get install --no-install-recommends gcc-multilib
+        run: sudo apt-get install -y --no-install-recommends gcc-multilib
 
       - name: Build LuaJIT (armeabi-v7a)
         run: |
