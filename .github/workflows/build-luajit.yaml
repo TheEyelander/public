@@ -5,8 +5,7 @@ jobs:
   build-luajit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@main
+      - uses: actions/checkout@main
         with:
           repository: LuaJIT/LuaJIT
 
@@ -49,8 +48,7 @@ jobs:
           mkdir arm64-v8a
           mv src/libluajit.* arm64-v8a
 
-      - name: Upload
-        uses: actions/upload-artifact@main
+      - uses: actions/upload-artifact@main
         with: 
           name: ${{ github.job }}
           path: |
