@@ -45,6 +45,7 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact/merge@main
+      - name: Merge and upload
+        uses: actions/upload-artifact/merge@main
         with:
           name: ${{ github.job }}
