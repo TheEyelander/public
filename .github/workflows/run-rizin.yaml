@@ -1,4 +1,4 @@
-name: Rizin
+name: Run Rizin
 on:
   workflow_dispatch:
     inputs:
@@ -6,13 +6,16 @@ on:
         required: true
 
 jobs:
-  rizin:
+  run-rizin:
     runs-on: ubuntu-latest
     container: kalilinux/kali-rolling
     steps:
-      - run: |
+      - name: Run Rizin
+        run: |
           apt-get update
           apt-get install -y --no-install-recommends curl rizin rz-ghidra
+          apt-get install -y --reinstall ca-certificates
+          update-ca-certificates --fresh
 
           rizin -q -c "aa; pdg" "$(curl -LOJ -w "%{filename_effective}" "${{ inputs.url }}")" > "${{ github.job }}.txt"
 
