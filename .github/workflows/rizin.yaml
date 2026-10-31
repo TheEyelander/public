@@ -11,7 +11,7 @@ jobs:
     container: kalilinux/kali-rolling
     steps:
       - run: |
-          sudo apt-get install --no-install-recommends rizin rz-ghidra
+          apt-get install --no-install-recommends rizin rz-ghidra
           rizin -q -c "aa; pdg" "$(curl -LOJ -w "%{filename_effective}" "${{ inputs.url }}")" > "${{ github.job }}.txt"
 
       - uses: actions/upload-artifact@main
