@@ -2,10 +2,10 @@ name: Build LuaJIT
 on: workflow_dispatch
 jobs:
   build-luajit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v7.0.1
         with:
           repository: LuaJIT/LuaJIT
 
@@ -49,7 +49,7 @@ jobs:
           mv src/libluajit.* arm64-v8a
 
       - name: Upload
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v7.0.2
         with: 
           name: luajit
           path: |
