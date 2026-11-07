@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         url: ${{ fromJson(inputs.urls) }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Set up FFmpeg
         run: curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ -f -
@@ -35,7 +35,7 @@ jobs:
             "$RUNNER_TEMP/$INPUT"
 
       - name: Upload
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v7.0.2
         with:
           archive: false
           path: ${{ runner.temp }}/${{ env.INPUT }}
@@ -43,8 +43,8 @@ jobs:
   merge-artifacts:
     needs: compress-videos
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/upload-artifact/merge@main
+      - uses: actions/upload-artifact/merge@v7.0.2
         with:
           name: compressed-videos
