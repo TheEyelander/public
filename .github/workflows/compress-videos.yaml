@@ -25,14 +25,7 @@ jobs:
         run: printf "%s\n" "INPUT=$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" -A "Mozilla/5.0 (Linux; Android 11; Redmi Note 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36" "${{ matrix.url }}")" >> "$GITHUB_ENV"
 
       - name: Compress
-        run: |
-          ./ffmpeg-master-latest-linux64-gpl/bin/ffmpeg \
-            -i "$INPUT" \
-            -c:v libx265 \
-            -c:a libopus \
-            -pix_fmt yuv420p10le \
-            -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" \
-            "$RUNNER_TEMP/$INPUT"
+        run: ./ffmpeg-master-latest-linux64-gpl/bin/ffmpeg -i "$INPUT" -c:v libx265 -c:a libopus -pix_fmt yuv420p10le -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" "$RUNNER_TEMP/$INPUT"
 
       - name: Upload
         uses: actions/upload-artifact@v7.0.2
