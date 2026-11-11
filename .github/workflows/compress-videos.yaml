@@ -18,10 +18,11 @@ jobs:
         url: ${{ fromJson(inputs.urls) }}
     runs-on: ubuntu-26.04
     steps:
-      - name: Set up
-        run: |
-          curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ -f -
-          printf "%s\n" "INPUT=$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" -A "Mozilla/5.0 (Linux; Android 11; Redmi Note 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36" "${{ matrix.url }}")" >> "$GITHUB_ENV"
+      - name: Set up FFmpeg
+        run: curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ -f -
+
+      - name: Download video
+        run: printf "%s\n" "INPUT=$(curl -fsSLOJ -w "%{filename_effective}" -b "${{ inputs.cookies }}" -A "Mozilla/5.0 (Linux; Android 11; Redmi Note 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36" "${{ matrix.url }}")" >> "$GITHUB_ENV"
 
       - name: Compress
         run: |
