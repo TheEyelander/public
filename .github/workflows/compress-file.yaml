@@ -19,3 +19,4 @@ jobs:
         with:
           name: compressed-file
           path: .
+          compression-level: 9
