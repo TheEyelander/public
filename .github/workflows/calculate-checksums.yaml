@@ -1,4 +1,4 @@
-name: Checksum
+name: Calculate Checksums
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +8,7 @@ on:
         required: false
 
 jobs:
-  checksum:
+  calculate-checksums:
     runs-on: ubuntu-26.04
     steps:
       - name: Download and calculate
