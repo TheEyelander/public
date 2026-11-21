@@ -28,7 +28,7 @@ jobs:
         run: ./ffmpeg -i "$INPUT" -c:v libx265 -c:a libopus -pix_fmt yuv420p10le -vf "scale='if(gt(iw, ih), -2, min(iw, ${{ inputs.max-resolution }}))':'if(gt(iw, ih), min(ih, ${{ inputs.max-resolution }}), -2)'" "$RUNNER_TEMP/$INPUT"
 
       - name: Upload
-        uses: actions/upload-artifact@v7.0.2
+        uses: actions/upload-artifact@v7
         with:
           archive: false
           path: ${{ runner.temp }}/${{ env.INPUT }}
@@ -38,6 +38,6 @@ jobs:
     if: always()
     runs-on: ubuntu-26.04
     steps:
-      - uses: actions/upload-artifact/merge@v7.0.2
+      - uses: actions/upload-artifact/merge@v7
         with:
           name: compressed-videos
